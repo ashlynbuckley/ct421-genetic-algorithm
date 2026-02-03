@@ -3,15 +3,12 @@ import sys
 
 # Extracts variables from the file
 def parse_variables(filename):
-    variables = []
     with open(filename, "r") as f:
-        variable_line = f.readline()
-        for char in variable_line:
-            if not char.isspace():
-                variables.append(int(char))
-    n_exams = variables[0]
-    n_slots = variables[1]
-    n_students = variables[2]
+        variables = f.readline().split()
+        n_exams = int(variables[0])
+        n_slots = int(variables[1])
+        n_students = int(variables[2])
+
     input_array = generate_input_array(filename, n_exams, n_students)
     return n_exams, n_slots, n_students, input_array
 
@@ -42,6 +39,6 @@ def read_instance(filename):
 # === STEPS ===
 # read in file
 hc_file = "tinyexample.txt"
-# file_location = input("ENTER FILE\n")
+# file_location = input("ENTER FILE PATHWAY:\n")
 # print (file_location)
 read_instance(hc_file)
