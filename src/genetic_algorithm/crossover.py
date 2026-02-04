@@ -2,6 +2,7 @@
 
 def crossover(population,results,selection_percentage):
     paired = []
+    combined_Timetable = []
    # Pair population with associated result
     for i in range(len(population)):
         paired.append((results[i],population[i]))
@@ -18,4 +19,4 @@ def crossover(population,results,selection_percentage):
 
     # Preform crossover - Swap half of each parent with one another?
 
-    return combinedTimetable
+    return combined_Timetable
