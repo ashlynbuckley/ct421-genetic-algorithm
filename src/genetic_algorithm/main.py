@@ -13,6 +13,8 @@ mutation_rate = 1
 n_exams, n_slots, n_students, input_array = pi.parse_variables(input_file)
 population = init_pop.init_population(population_size, n_exams, n_slots)
 print(population)
+results = evaluate_population(population, input_array, n_slots)
+print(results)
 results = evaluate_population(population, input_array)
 print(results)
 
