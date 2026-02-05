@@ -1,4 +1,4 @@
-# Written by Ashlyn and Avalon ❀⸜(˶´ ˘ `˶)⸝❀
+# Written by Ashlyn ❀⸜(˶´ ˘ `˶)⸝❀
 import random
 
 def generate_new_generation(parents, elites):
@@ -24,6 +24,7 @@ def tournament_selection(paired, n_parents, t_size):
 
 # Pick the best individuals of the gen and ensure they carry into the next
 def select_elites(paired, elite_percentage):
+    # Avalon contributed to this function also
     # Select top % (number may vary)
     n_elites = int(elite_percentage * len(paired))
     # Append them to a separate list
@@ -34,6 +35,7 @@ def select_elites(paired, elite_percentage):
     return elites
 
 def pair_results_chromosomes(population, results):
+    # Avalon wrote this function originally in crossover
     paired = []
     # Create tuples of population with associated result
     for i in range(len(population)):
@@ -49,3 +51,4 @@ def selection_process(population, results, elite_percentage, t_size):
     n_parents = len(paired)
     selected = tournament_selection(paired, n_parents, t_size)
     next_generation = generate_new_generation(selected, elites)
+    return next_generation
