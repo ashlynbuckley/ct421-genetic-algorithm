@@ -9,13 +9,14 @@ def generate_new_generation(parents, elites):
 def tournament_selection(paired, n_parents, t_size):
     selected = 0
     parents = []
+    # Keep going until you have enough parents for the next gen
     while selected != n_parents:
         contenders = []
         # Select contenders randomly (with replacement)
         for _ in range(t_size):
             rand_chromosome = paired[random.randint(0, len(paired) - 1)]
             contenders.append(rand_chromosome)
-        # FIGHT!
+        # Get the top chromosome of each tournament
         contenders.sort(reverse=True, key=lambda x: x[0])
         parents.append(contenders[0])
         selected += 1
@@ -41,6 +42,7 @@ def pair_results_chromosomes(population, results):
     paired.sort(reverse=True, key=lambda x: x[0])
     return paired
 
+# ENTRY POINT FUNCTION
 def selection_process(population, results, elite_percentage, t_size):
     paired = pair_results_chromosomes(population, results)
     elites = select_elites(paired, elite_percentage)
