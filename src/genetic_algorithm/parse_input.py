@@ -1,17 +1,17 @@
-# Written by ashlyn do not touch EVERRRR ESPECIALLY AVALON
-import sys
+# Written by Ashlyn
 
 # Extracts variables from the file
 def parse_variables(filename):
     with open(filename, "r") as f:
+        # Look at the first line, turn it into a list of str
         variables = f.readline().split()
+        # Grab each and use int() to convert them from str -> int
         n_exams = int(variables[0])
         n_slots = int(variables[1])
         n_students = int(variables[2])
+    return n_exams, n_slots, n_students
 
-    input_array = generate_input_array(filename, n_exams, n_students)
-    return n_exams, n_slots, n_students, input_array
-
+# Using variables extracted, generate a boolean 2d list of the txt file data
 def generate_input_array(filename, n_exams, n_students):
     with open(filename, "r") as f:
         # For every student generate a new row with length = n_exams
@@ -30,15 +30,11 @@ def generate_input_array(filename, n_exams, n_students):
     return input_array
 
 # ENTRY POINT FUNCTION
-def read_instance(filename):
+def read_input_file(filename):
     print("Reading input file...")
-    n_exams, n_slots, n_students, input_array = parse_variables(filename)
+    n_exams, n_slots, n_students = parse_variables(filename)
+    input_array = generate_input_array(filename, n_exams, n_students)
+    # For debugging
     for row in input_array:
         print(*row)
-
-# === STEPS ===
-# read in file
-hc_file = "tinyexample.txt"
-# file_location = input("ENTER FILE PATHWAY:\n")
-# print (file_location)
-read_instance(hc_file)
+    return n_exams, n_slots, n_students, input_array
