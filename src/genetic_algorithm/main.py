@@ -1,7 +1,7 @@
 # Written by Karolina
 import init_population as init_pop
 from evaluate_fitness import evaluate_population
-from src.genetic_algorithm.crossover import crossover
+from crossover import crossover
 from mutate import mutate
 from src.genetic_algorithm.parse_input import read_input_file
 from src.genetic_algorithm.selection import selection_process
@@ -29,7 +29,7 @@ next_generation = selection_process(population, results, elite_percentage, t_siz
 
 # Crossover & Mutate
 # Avalon Brathwaite
-offspring = crossover(next_generation, results, selection_percentage)
+offspring = crossover(next_generation)
 # mutate(offspring, mutation_rate)
 
 # Repeat?
