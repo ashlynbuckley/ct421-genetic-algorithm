@@ -30,6 +30,7 @@ next_generation = selection_process(population, results, elite_percentage, t_siz
 # Crossover & Mutate
 # Avalon Brathwaite
 offspring = crossover(next_generation)
-# mutate(offspring, mutation_rate)
+mutated_offspring = mutate(offspring, mutation_rate)
+print("Total Mutated Offspring: ", mutated_offspring)
 
 # Repeat?
