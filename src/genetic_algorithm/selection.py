@@ -1,6 +1,19 @@
 # Written by Ashlyn ❀⸜(˶´ ˘ `˶)⸝❀
 import random
 
+# Before I return the next_generation I need to remove the fitness scores
+def clean_chromosomes(selected, elites):
+#     for each of them, get rid of the first el in the tuple and replace it all with the second el (the actual timetable)
+    for i, chromosome in enumerate(selected):
+        temp = chromosome[1]
+        selected[i] = temp
+
+    for i, chromosome in enumerate(elites):
+        temp = chromosome[1]
+        elites[i] = temp
+
+    return selected, elites
+
 def generate_new_generation(parents, elites):
     next_generation = parents + elites
     return next_generation
@@ -50,5 +63,6 @@ def selection_process(population, results, elite_percentage, t_size):
     elites = select_elites(paired, elite_percentage)
     n_parents = len(paired)
     selected = tournament_selection(paired, n_parents, t_size)
-    next_generation = generate_new_generation(selected, elites)
+    clean_selected, clean_elites = clean_chromosomes(selected, elites)
+    next_generation = generate_new_generation(clean_selected, clean_elites)
     return next_generation
