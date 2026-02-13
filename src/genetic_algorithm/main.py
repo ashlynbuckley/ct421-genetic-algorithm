@@ -8,10 +8,11 @@ from src.genetic_algorithm.selection import selection_process
 
 # Fields
 input_file = "tinyexample.txt"
-population_size = 100
+population_size = 1000
 elite_percentage = 0.05
 t_size = 5
 mutation_rate = 1
+generations = 500
 
 # Parse input
 n_exams, n_slots, n_students, input_array = read_input_file(input_file)
@@ -20,17 +21,20 @@ n_exams, n_slots, n_students, input_array = read_input_file(input_file)
 population = init_pop.init_population(population_size, n_exams, n_slots)
 print(population)
 
-# Fitness
-results = evaluate_population(population, input_array, n_slots)
-print(results)
+for i in range(generations):
+    # Fitness
+    results = evaluate_population(population, input_array, n_slots)
+    # print(results)
 
-# Select chromosomes to continue with
-next_generation = selection_process(population, results, elite_percentage, t_size)
+    # Select chromosomes to continue with
+    next_generation = selection_process(population, results, elite_percentage, t_size)
 
-# Crossover & Mutate
-# Avalon Brathwaite
-offspring = crossover(next_generation)
-mutated_offspring = mutate(offspring, mutation_rate)
-print("Total Mutated Offspring: ", mutated_offspring)
+    # Crossover & Mutate
+    # Avalon Brathwaite
+    offspring = crossover(next_generation)
+    mutated_offspring = mutate(offspring, mutation_rate)
 
-# Repeat?
+    population = mutated_offspring
+    print("population after", i, "loop", population)
+
+print("Final timetables: ",population)
