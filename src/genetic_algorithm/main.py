@@ -6,12 +6,12 @@ from src.genetic_algorithm.parse_input import read_input_file
 from src.genetic_algorithm.selection import selection_process
 
 # Fields
-input_file = "tinyexample.txt"
+input_file = "test_case1.txt"
 population_size = 100
 elite_percentage = 0.05
 t_size = 5
-mutation_rate = 1
-generations = 10
+mutation_rate = 0.3
+generations = 500
 
 # Parse input
 n_exams, n_slots, n_students, input_array = read_input_file(input_file)
@@ -35,4 +35,18 @@ for i in range(generations):
     population = mutated_offspring
     print("population after", i, "loop", population)
 
-print("Final timetables: ",population)
+# print("Final timetables: ",population)
+
+# Avalon Brathwaite
+# Evaluate final population
+final_results = evaluate_population(population, input_array, n_slots)
+
+# Get best timetable
+best_index = max(range(len(final_results)), key=lambda i: final_results[i])
+best_fitness = final_results[best_index]
+best_timetable = population[best_index]
+
+print("\nPerformance Results:")
+print("Best fitness achieved:", best_fitness)
+for row in best_timetable:
+    print(*row)

@@ -12,7 +12,7 @@ def mutate(offspring, mutation_rate):
             exam = random.randrange(len(timetable))
             slots = timetable[exam] # Gives us all the time slots for the random exam row chosen
 
-            print("Unmutated Offspring row: ", slots)
+            # print("Unmutated Offspring row: ", slots)
 
             scheduled_exam_slot = slots.index(True)
             new_slot = random.randrange(len(slots))
@@ -24,10 +24,11 @@ def mutate(offspring, mutation_rate):
             # Shift the current true exam slot to avoid violating constraints, this could give us consecutive exams or no exams scheduled at all.
             slots[scheduled_exam_slot] = False
             slots[new_slot] = True
-            print("Mutated Offspring: ", slots)
+            # print("Mutated Offspring: ", slots)
 
             mutated_offspring.append(timetable)
-
+        else:
+            mutated_offspring.append(timetable)
     return mutated_offspring
 
 # Visual Help >:D timetable =
