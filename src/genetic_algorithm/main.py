@@ -1,5 +1,6 @@
 import numpy as np
 import plt
+import time
 
 import init_population as init_pop
 from evaluate_fitness import evaluate_population
@@ -33,6 +34,11 @@ for x in range(multiple_run_count):
     max_results = []
     min_results = []
     std_results = []
+
+    # Start timer for computational complexity analysis
+    # start = time.perf_counter() This was done prior to making graphs, thus it is commented out as
+    # multiple timers would be started in this loop
+
     for i in range(generations):
         # Fitness
         results = evaluate_population(population, input_array, n_slots)
@@ -40,8 +46,6 @@ for x in range(multiple_run_count):
         max_results.append(np.max(results))
         min_results.append(np.min(results))
         std_results.append(np.std(results))
-
-        # print(results)
 
         # Select chromosomes to continue with
         next_generation = selection_process(population, results, elite_percentage, t_size)
@@ -51,17 +55,18 @@ for x in range(multiple_run_count):
         mutated_offspring = mutate(offspring, mutation_rate)
 
         population = mutated_offspring
-        print("population after", i, "loop", population)
 
-    # print("Final timetables: ",population)
-
-    # Avalon Brathwaite
     # Evaluate final population
     final_results = evaluate_population(population, input_array, n_slots)
     multiple_run_mean.append(np.mean(mean_results))
     multiple_run_max.append(np.max(final_results))
     multiple_run_min.append(np.min(final_results))
     multiple_run_std.append(np.std(final_results))
+
+    # End timer for computational complexity analysis
+    # end = time.perf_counter()
+    # elapsed = end - start
+    # This was done before making graphs thus it is commented out to not end multiple timers
 
     # Get best timetable
     best_index = max(range(len(final_results)), key=lambda i: final_results[i])
@@ -72,6 +77,9 @@ for x in range(multiple_run_count):
     print("Best fitness achieved:", best_fitness)
     for row in best_timetable:
         print(*row)
+
+    # print("Computational Time: ", elapsed)
+    # This was done before making graphs thus it is commented out to not end multiple timers
 
     #plot gen graph
     plt.plot(mean_results)

@@ -17,11 +17,6 @@ def crossover(population):
                 else:
                     child.append(parent_two[j])
 
-            # print("Parent One", parent_one)
-            # print("Parent Two", parent_two)
-            # print("Child", child)
             offspring.append(child)
 
-    # print("Number of parents", len(population))
-    # print("Offspring:", offspring, "\nOffspring Count:", len(offspring))
     return offspring
